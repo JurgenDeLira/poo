@@ -1,18 +1,37 @@
 public class AutomovilPrivate {
 
+    private int id;
     private String fabricante;
     private String modelo;
+
     private String color = "Blanco";
     private double cilindrada; //Retornara un null si tu objeto no usa este atributo
     private int capacidadEstanque = 40; //si tu objeto no tiene nada usara ese 40
 
     private static String colorPatente = "Naranja";
     private static int capacidadEstanqueEstatico = 30;
+    private static int ultimoId;
+
+    public static final Integer VELOCIDAD_MAX_CARRETERA = 120;
+    public static final int VELOCIDAD_MAX_CIUDAD = 60;
+
+    public static final String COLOR_ROJO = "Rojo";
+    public static final String COLOR_AMARILLO = "Amarillo";
+    public static final String COLOR_AZUL = "Azul";
+    public static final String COLOR_BLANCO = "Blanco";
+    public static final String COLOR_GRIS = "Gris Oscuro";
+
+
+    //Constructor para no colocar parametros
+    public AutomovilPrivate() {
+        this.id = ++ ultimoId;
+    }
 
     /*Constructor, es para definir algún
     proceso de inicialización, solo usaremos fabricante
     y modelo, lo demas lo obtendra de getters y setters*/
     public AutomovilPrivate(String fabricante, String modelo){
+        this();
         this.fabricante = fabricante;
         this.modelo = modelo;
     }
@@ -37,11 +56,15 @@ public class AutomovilPrivate {
         this.capacidadEstanque = capacidadEstanque;
     }
 
-    //Constructor para no colocar parametros
-    public AutomovilPrivate(){
-    }
 
     // getters setters o leer asignar
+    public int getId() {
+        return id;
+    }
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public String getFabricante(){
         return this.fabricante;
     }
@@ -92,7 +115,8 @@ public class AutomovilPrivate {
     }
 
     public String verDetalle(){
-        return  "auto.fabricante = " + this.fabricante +
+        return  "auto.id = " + this.id +
+                "\nauto.fabricante = " + this.fabricante +
                 "\nauto.modelo = " + this.modelo +
                 "\nauto.color = " + this.color +
                 "\nauto.patenteColor = " + colorPatente +
@@ -144,7 +168,7 @@ public class AutomovilPrivate {
 
     @Override
     public String toString() {
-        return fabricante + " " + modelo;
+        return this.id + " : " + fabricante + " " + modelo;
                 /*o puedes llamar los atributos de esta forma:
                 "AutomovilPrivate{" +
                 "fabricante='" + fabricante + '\'' +
