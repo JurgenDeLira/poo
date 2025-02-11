@@ -6,17 +6,17 @@ public class EjemploAutomovilPrivate {
         AutomovilPrivate auto = new AutomovilPrivate(
                 "Honda", "Corolla");
         auto.setCilindrada(2.0);
-        auto.setColor("Negro");
+        auto.setColor(Color.BLANCO);
 
         AutomovilPrivate auto2 = new AutomovilPrivate(
                 "Mazda", "BT-50",
-                "Rojo", 3.0);
+                Color.ROJO, 3.0);
         System.out.println("auto2.leerFabricante() = " + auto2.getFabricante());
 
         AutomovilPrivate nissan1 = new AutomovilPrivate("Nissan",
-                "Navara", "Gris oscuro", 3.5, 50);
+                "Navara", Color.GRIS, 3.5, 50);
         AutomovilPrivate nissan2 = new AutomovilPrivate("Nissan",
-                "Navara", "Gris oscuro", 3.5, 50);
+                "Navara", Color.GRIS, 3.5, 50);
 
         AutomovilPrivate auto3= new AutomovilPrivate();
         Date fecha = new Date();

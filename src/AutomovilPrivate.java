@@ -3,12 +3,14 @@ public class AutomovilPrivate {
     private int id;
     private String fabricante;
     private String modelo;
-
-    private String color = "Blanco";
+    private Color color = Color.GRIS;
     private double cilindrada; //Retornara un null si tu objeto no usa este atributo
     private int capacidadEstanque = 40; //si tu objeto no tiene nada usara ese 40
 
-    private static String colorPatente = "Naranja";
+    private TipoAutomovil tipo;
+
+    private static Color colorPatente = Color.NARANJO;
+    //private static String colorPatente = "Naranja"
     private static int capacidadEstanqueEstatico = 30;
     private static int ultimoId;
 
@@ -36,17 +38,17 @@ public class AutomovilPrivate {
         this.modelo = modelo;
     }
 
-    public AutomovilPrivate(String fabricante, String modelo, String color) {
+    public AutomovilPrivate(String fabricante, String modelo, Color color) {
         this(fabricante, modelo);
         this.color = color;
     }
 
-    public AutomovilPrivate(String fabricante, String modelo, String color, double cilindrada) {
+    public AutomovilPrivate(String fabricante, String modelo, Color color, double cilindrada) {
         this(fabricante, modelo, color);
         this.cilindrada = cilindrada;
     }
 
-    public AutomovilPrivate(String fabricante, String modelo, String color, double cilindrada, int capacidadEstanque) {
+    public AutomovilPrivate(String fabricante, String modelo, Color color, double cilindrada, int capacidadEstanque) {
         this(fabricante, modelo, color, cilindrada); //esto es lo mismo que:
         /*this.fabricante = fabricante;
         this.modelo = modelo;
@@ -79,10 +81,10 @@ public class AutomovilPrivate {
         this.modelo = modelo;
     }
 
-    public String getColor(){
+    public Color getColor(){
         return color;
     }
-    public void setColor(String color){
+    public void setColor(Color color){
         this.color = color;
     }
 
@@ -100,10 +102,10 @@ public class AutomovilPrivate {
         this.capacidadEstanque = capacidadEstanque;
     }
 
-    public static String getColorPatente(){
+    public static Color getColorPatente(){
         return colorPatente;
     }
-    public static void setColorPatente(String colorPatente){
+    public static void setColorPatente(Color colorPatente){
         AutomovilPrivate.colorPatente = colorPatente;
     }
 
@@ -114,12 +116,22 @@ public class AutomovilPrivate {
         AutomovilPrivate.capacidadEstanqueEstatico = capacidadEstanqueEstatico;
     }
 
+    public TipoAutomovil getTipo() {
+        return tipo;
+    }
+    public void setTipo(TipoAutomovil tipo) {
+        this.tipo = tipo;
+    }
+
+    // Métodos
+
     public String verDetalle(){
         return  "auto.id = " + this.id +
                 "\nauto.fabricante = " + this.fabricante +
                 "\nauto.modelo = " + this.modelo +
-                "\nauto.color = " + this.color +
-                "\nauto.patenteColor = " + colorPatente +
+                "\nauto.tipo = " + this.getTipo().getDescripcion() +
+                "\nauto.color = " + this.color.getColor() +
+                "\nauto.patenteColor = " + colorPatente.getColor() +
                 "\nauto.cilindrada = " + this.cilindrada;
     }
 
