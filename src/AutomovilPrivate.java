@@ -3,9 +3,11 @@ public class AutomovilPrivate {
     private int id;
     private String fabricante;
     private String modelo;
-    private Color color = Color.GRIS;
-    private double cilindrada; //Retornara un null si tu objeto no usa este atributo
-    private int capacidadEstanque = 40; //si tu objeto no tiene nada usara ese 40
+    private Color color = Color.GRIS;//si tu objeto no tiene nada usara ese GRIS
+    private Motor motor; //Retornara un null si tu objeto no usa este atributo
+    private Estanque estanque;
+    private Persona conductor;
+    private Rueda[] ruedas;
 
     private TipoAutomovil tipo;
 
@@ -22,7 +24,6 @@ public class AutomovilPrivate {
     public static final String COLOR_AZUL = "Azul";
     public static final String COLOR_BLANCO = "Blanco";
     public static final String COLOR_GRIS = "Gris Oscuro";
-
 
     //Constructor para no colocar parametros
     public AutomovilPrivate() {
@@ -43,21 +44,26 @@ public class AutomovilPrivate {
         this.color = color;
     }
 
-    public AutomovilPrivate(String fabricante, String modelo, Color color, double cilindrada) {
+    public AutomovilPrivate(String fabricante, String modelo, Color color, Motor motor) {
         this(fabricante, modelo, color);
-        this.cilindrada = cilindrada;
+        this.motor = motor ;
     }
 
-    public AutomovilPrivate(String fabricante, String modelo, Color color, double cilindrada, int capacidadEstanque) {
-        this(fabricante, modelo, color, cilindrada); //esto es lo mismo que:
+    public AutomovilPrivate(String fabricante, String modelo, Color color, Motor motor, Estanque estanque) {
+        this(fabricante, modelo, color, motor); //esto es lo mismo que:
         /*this.fabricante = fabricante;
         this.modelo = modelo;
         this.color = color;
         this.cilindrada = cilindrada;*/
         //O sea estamos llamando el método anterior con su construcción
-        this.capacidadEstanque = capacidadEstanque;
+        this.estanque = estanque;
     }
 
+    public AutomovilPrivate(String fabricante, String modelo, Color color, Motor motor, Estanque estanque, Persona conductor, Rueda[] ruedas) {
+        this(fabricante, modelo, color, motor, estanque);
+        this.conductor = conductor;
+        this.ruedas = ruedas;
+    }
 
     // getters setters o leer asignar
     public int getId() {
@@ -88,20 +94,6 @@ public class AutomovilPrivate {
         this.color = color;
     }
 
-    public double getCilindrada(){
-        return cilindrada;
-    }
-    public void setCilindrada(double cilindrada){
-        this.cilindrada = cilindrada;
-    }
-
-    public int getCapacidadEstanque(){
-        return capacidadEstanque;
-    }
-    public void setCapacidadEstanque(int capacidadEstanque){
-        this.capacidadEstanque = capacidadEstanque;
-    }
-
     public static Color getColorPatente(){
         return colorPatente;
     }
@@ -123,6 +115,34 @@ public class AutomovilPrivate {
         this.tipo = tipo;
     }
 
+    public Motor getMotor() {
+        return motor;
+    }
+    public void setMotor(Motor motor) {
+        this.motor = motor;
+    }
+
+    public Estanque getEstanque() {
+        return estanque;
+    }
+    public void setEstanque(Estanque estanque) {
+        this.estanque = estanque;
+    }
+
+    public Persona getConductor() {
+        return conductor;
+    }
+    public void setConductor(Persona conductor) {
+        this.conductor = conductor;
+    }
+
+    public Rueda[] getRuedas() {
+        return ruedas;
+    }
+    public void setRuedas(Rueda[] ruedas) {
+        this.ruedas = ruedas;
+    }
+
     // Métodos
 
     public String verDetalle(){
@@ -132,7 +152,7 @@ public class AutomovilPrivate {
                 "\nauto.tipo = " + this.getTipo().getDescripcion() +
                 "\nauto.color = " + this.color.getColor() +
                 "\nauto.patenteColor = " + colorPatente.getColor() +
-                "\nauto.cilindrada = " + this.cilindrada;
+                "\nauto.cilindrada = " + this.motor.getCilindrada();
     }
 
     public String acelerar (int rpm){
@@ -151,11 +171,11 @@ public class AutomovilPrivate {
 
     //Método con float
     public float calcularConsumo(int km, float porcentajeBencina){
-        return  km/(capacidadEstanque*porcentajeBencina);
+        return  km/(this.estanque.getCapacidad()*porcentajeBencina);
     }
     //Este ya es otro metodo con el mismo nombre, pero usa int en el argumento
     public float calcularConsumo(int km, int porcentajeBencina){
-        return  km/(capacidadEstanque*(porcentajeBencina/100f));
+        return  km/(this.estanque.getCapacidad()*(porcentajeBencina/100f));
     }
     // ¿que pasaria si este método fuera static?
     public static float calcularConsumoEstatico(int km, int porcentajeBencina){

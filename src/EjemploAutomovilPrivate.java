@@ -3,20 +3,26 @@ import java.util.Date;
 public class EjemploAutomovilPrivate {
     public static void main(String[] args) {
 
+        Motor motorAuto = new Motor(2.0, TipoMotor.BENCINA);
         AutomovilPrivate auto = new AutomovilPrivate(
                 "Honda", "Corolla");
-        auto.setCilindrada(2.0);
+        auto.setMotor(motorAuto);
+        auto.setEstanque(new Estanque());
         auto.setColor(Color.BLANCO);
 
+        Motor motorAuto2 = new Motor(3.0, TipoMotor.DIESEL);
         AutomovilPrivate auto2 = new AutomovilPrivate(
                 "Mazda", "BT-50",
-                Color.ROJO, 3.0);
+                Color.ROJO, motorAuto2);
+        auto2.setEstanque(new Estanque(45));
         System.out.println("auto2.leerFabricante() = " + auto2.getFabricante());
 
         AutomovilPrivate nissan1 = new AutomovilPrivate("Nissan",
-                "Navara", Color.GRIS, 3.5, 50);
+                "Navara", Color.GRIS,
+                new Motor(4.0,TipoMotor.DIESEL), new Estanque(50));
         AutomovilPrivate nissan2 = new AutomovilPrivate("Nissan",
-                "Navara", Color.GRIS, 3.5, 50);
+                "Navara", Color.GRIS,
+                new Motor(3.5, TipoMotor.BENCINA), new Estanque(50));
 
         AutomovilPrivate auto3= new AutomovilPrivate();
         Date fecha = new Date();
