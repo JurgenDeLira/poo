@@ -123,6 +123,9 @@ public class AutomovilPrivate {
     }
 
     public Estanque getEstanque() {
+        if(estanque == null) {
+            this.estanque = new Estanque();
+        }
         return estanque;
     }
     public void setEstanque(Estanque estanque) {
@@ -146,13 +149,30 @@ public class AutomovilPrivate {
     // Métodos
 
     public String verDetalle(){
-        return  "auto.id = " + this.id +
-                "\nauto.fabricante = " + this.fabricante +
-                "\nauto.modelo = " + this.modelo +
-                "\nauto.tipo = " + this.getTipo().getDescripcion() +
-                "\nauto.color = " + this.color.getColor() +
-                "\nauto.patenteColor = " + colorPatente.getColor() +
-                "\nauto.cilindrada = " + this.motor.getCilindrada();
+        String detalle = "auto.id = " + this.id +
+                "\nauto.fabricante = " + this.getFabricante() +
+                "\nauto.modelo = " + this.getModelo();
+
+        if (this.getTipo() != null) {
+            detalle += "\nauto.tipo = " + this.getTipo().getDescripcion();
+        }
+        detalle += "\nauto.color = " + this.color +
+                "\nauto.patenteColor = " + colorPatente;
+        if(this.motor != null) {
+            detalle += "\nauto.cilindrada = " + this.motor.getCilindrada();
+        }
+
+        if (conductor != null) {
+            detalle += "\nConductor Honda: " + this.getConductor();
+        }
+        if (getRuedas() != null) {
+            detalle += "\nRuedas del automóvil: ";
+        for (Rueda r: this.getRuedas()){
+            detalle += "\n" + r.getFabricante() + ", aro: " + r.getAro() + ", ancho: " + r.getAncho();
+            }
+        }
+
+        return detalle;
     }
 
     public String acelerar (int rpm){
@@ -171,11 +191,11 @@ public class AutomovilPrivate {
 
     //Método con float
     public float calcularConsumo(int km, float porcentajeBencina){
-        return  km/(this.estanque.getCapacidad()*porcentajeBencina);
+        return  km/(this.getEstanque().getCapacidad()*porcentajeBencina);
     }
     //Este ya es otro metodo con el mismo nombre, pero usa int en el argumento
     public float calcularConsumo(int km, int porcentajeBencina){
-        return  km/(this.estanque.getCapacidad()*(porcentajeBencina/100f));
+        return  km/(this.getEstanque().getCapacidad()*(porcentajeBencina/100f));
     }
     // ¿que pasaria si este método fuera static?
     public static float calcularConsumoEstatico(int km, int porcentajeBencina){
