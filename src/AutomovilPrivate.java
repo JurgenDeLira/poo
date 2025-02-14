@@ -8,6 +8,7 @@ public class AutomovilPrivate {
     private Estanque estanque;
     private Persona conductor;
     private Rueda[] ruedas;
+    private int indiceRuedas;
 
     private TipoAutomovil tipo;
 
@@ -28,6 +29,7 @@ public class AutomovilPrivate {
     //Constructor para no colocar parametros
     public AutomovilPrivate() {
         this.id = ++ ultimoId;
+        this.ruedas = new Rueda[5];
     }
 
     /*Constructor, es para definir algún
@@ -147,6 +149,13 @@ public class AutomovilPrivate {
     }
 
     // Métodos
+
+    public AutomovilPrivate addRueda(Rueda rueda){
+        if (indiceRuedas < this.ruedas.length) {
+            this.ruedas[indiceRuedas++] = rueda;
+        }
+        return this;
+    }
 
     public String verDetalle(){
         String detalle = "auto.id = " + this.id +
