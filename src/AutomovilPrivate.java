@@ -1,4 +1,4 @@
-public class AutomovilPrivate {
+public class AutomovilPrivate implements Comparable<AutomovilPrivate>{
 
     private int id;
     private String fabricante;
@@ -240,4 +240,11 @@ public class AutomovilPrivate {
                 '}';*/
     }
 
+    @Override
+    public int compareTo(AutomovilPrivate a) {
+        return this.modelo.compareTo(a.modelo);
+        /* o hacerlo return this.fabricante.compareTo(a.fabricante);
+         para que sea sort por fabricante */
+        // return this.conductor.toString().compareTo(a.conductor.toString());
+    }
 }
